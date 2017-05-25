@@ -1,0 +1,86 @@
+from __future__ import print_function
+from IPython.display import clear_output
+game = True
+def set_the_game(list):
+    clear_output()
+    print('   |   |')
+    print(' ' + list[7] + ' | ' + list[8] + ' | ' + list[9])
+    print('   |   |')
+    print('-----------')
+    print('   |   |')
+    print(' ' + list[4] + ' | ' + list[5] + ' | ' + list[6])
+    print('   |   |')
+    print('-----------')
+    print('   |   |')
+    print(' ' + list[1] + ' | ' + list[2] + ' | ' + list[3])
+    print('   |   |')
+def win(list):
+    if((list[7]=='X'and list[5]=='X' and list[3]=='X') or (list[9]=='X'and list[5]=='X' and list[1]=='X') or
+           (list[7] == 'X' and list[8] == 'X' and list[9] == 'X') or (list[4]=='X' and list[5]=='X' and list[6]=='X') or
+        (list[1] == 'X' and  list[2] == 'X' and list[3] == 'X') or (list[7] == 'X' and  list[4] == 'X' and list[1] == 'X')
+        or (list[8] == 'X' and  list[5] == 'X' and list[2] == 'X') or (list[9] == 'X' and  list[6] == 'X' and list[3] == 'X')):
+        return 3
+    elif ((list[7] == 'O' and list[5] == 'O' and list[3] == 'O') or (list[9] == 'O' and list[5] == 'O' and list[1] == 'O') or
+        (list[7] == 'O' and list[8] == 'O' and list[9] == 'O') or (list[4] == 'O' and list[5] == 'O' and list[6] == 'O') or
+        (list[1] == 'O' and list[2] == 'O' and list[3] == 'O') or (list[7] == 'O' and list[4] == 'O' and list[1] == 'O') or
+        (list[8] == 'O' and list[5] == 'O' and list[2] == 'O') or (list[9] == 'O' and list[6] == 'O' and list[3] == 'O')):
+        return 4
+def chance(player,x,list):
+    if(x==1):
+        if(list[player]==' '):
+            list[player]='X'
+            set_the_game(list)
+            c = win(list)
+            if(c == 3):
+                return 4
+        else:
+            print("The position is already filled please enter a new integer")
+            return 1
+    elif(x==2):
+        if (list[player] == ' '):
+            list[player] = 'O'
+            set_the_game(list)
+            d = win(list)
+            if (d == 4):
+                return 5
+        else:
+            print("The position is already filled please enter a new integer")
+            return 1
+print('Welcome to Tic Tac Toe!')
+while(True):
+    list = [' '] * 10
+    set_the_game(list)
+   # a = 0
+    c = 0
+    while(game == True):
+        while(True):
+            print ("Player1 please enter a input(0-9)")
+            player1 = input()
+            x = 1
+            a = chance(player1,x,list)
+            if(a == 4):
+                print("Player1 won the game")
+                print("congratulations")
+                c = 1
+                game = False
+                break
+            elif(a != 1):
+                break
+        if(c == 1):
+            print("End of the game")
+            break
+        while(True):
+            print ("Player2 please enter a input(0-9)")
+            player2 = input()
+            y=2
+            b = chance(player2,y,list)
+            if (b == 5):
+                print("Player2 won the game")
+                print("congratulations")
+                c = 1
+                break
+            elif(b != 1):
+                break
+        if (c == 1):
+            print("End of the game")
+            break
